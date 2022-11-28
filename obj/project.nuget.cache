@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "KUPeLJ5fy1ub82nlHTRXyd/N/pvfGr3q4uqxN7XFnyDMnXDPXJXFuowN+pH8U8RpaCwfEnUgJ8RvVq3DcBSffw==",
+  "success": true,
+  "projectFilePath": "/Users/falljr/RiderProjects/DataBaseModule3Task/DataBaseModule3Task/DataBaseModule3Task.csproj",
+  "expectedPackageFiles": [
+    "/Users/falljr/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/Users/falljr/.nuget/packages/npgsql/7.0.0/npgsql.7.0.0.nupkg.sha512",
+    "/Users/falljr/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
