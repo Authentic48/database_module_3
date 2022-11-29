@@ -106,7 +106,7 @@ namespace DataBaseModule3Task
         {
             try
             {
-                NpgsqlCommand cmd = new NpgsqlCommand("UPDATE products SET quantity=@quantity  WHERE id=@id", connection);
+                NpgsqlCommand cmd = new NpgsqlCommand("UPDATE products SET quantity=quantity+@quantity  WHERE id=@id", connection);
                 Console.WriteLine("Enter the product id");
                 cmd.Parameters.AddWithValue("@id",  Int32.Parse(Console.ReadLine()));
                 Console.WriteLine("Enter the product quantity");
@@ -169,7 +169,7 @@ namespace DataBaseModule3Task
         {
             try
             {
-                NpgsqlCommand cmd = new NpgsqlCommand("SELECT * from products JOIN sub_sub_categories ON products.sub_sub_category_id = sub_sub_categories.id  JOIN sub_categories ON sub_sub_categories.sub_category_id = sub_categories.id  JOIN categories ON sub_categories.category_id = categories.id", connection);
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT products.id, products.name, products.quantity, products.supplier_id, products.brand_id, sub_sub_categories.name as sub_sub_cat_name, sub_categories.name as sub_cat_name, categories.name as cat_name from products JOIN sub_sub_categories ON products.sub_sub_category_id = sub_sub_categories.id  JOIN sub_categories ON sub_sub_categories.sub_category_id = sub_categories.id  JOIN categories ON sub_categories.category_id = categories.id", connection);
                 var reader = cmd.ExecuteReader();
                 
                while (reader.Read())
