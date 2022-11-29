@@ -190,7 +190,7 @@ namespace DataBaseModule3Task
         {
             try
             {
-                NpgsqlCommand cmd = new NpgsqlCommand("SELECT DISTINCT sub_sub_categories.id AS sub_sub_cat_id, sub_sub_categories.name AS sub_sub_cat_name, sub_categories.id AS sub_cat_id, sub_categories.name AS sub_cat_name, categories.id AS cat_id, categories.name AS cat_name   FROM products  JOIN sub_sub_categories ON products.sub_sub_category_id != sub_sub_categories.id  JOIN sub_categories ON sub_sub_categories.sub_category_id = sub_categories.id   JOIN categories ON sub_categories.category_id = categories.id  WHERE NOT EXISTS (SELECT null FROM products WHERE products.sub_sub_category_id = sub_sub_categories.id) AND EXISTS (SELECT null FROM sub_categories WHERE sub_categories.id = sub_sub_categories.sub_category_id) AND EXISTS (SELECT null FROM  categories WHERE categories.id = sub_categories.category_id)", connection);
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT ssc.id, ssc.name FROM sub_sub_categories ssc LEFT JOIN products p ON p.sub_sub_category_id = ssc.id GROUP BY ssc.id, ssc.name HAVING COUNT (p.sub_sub_category_id)=0 UNION ALL SELECT sc.id, sc.name FROM sub_categories sc LEFT JOIN sub_sub_categories ssc ON ssc.sub_category_id = sc.id LEFT JOIN products p ON p.sub_sub_category_id = ssc.id GROUP BY sc.id, sc.name HAVING COUNT (p.sub_sub_category_id)=0 UNION ALL SELECT c.id, c.name FROM categories c  LEFT JOIN sub_categories sc ON sc.category_id = c.id LEFT JOIN sub_sub_categories ssc ON ssc.sub_category_id = sc.id LEFT JOIN products p ON p.sub_sub_category_id = ssc.id GROUP BY c.id, c.name HAVING COUNT (p.sub_sub_category_id)=0", connection);
                 var reader = cmd.ExecuteReader();
 
                 while (reader.Read())
