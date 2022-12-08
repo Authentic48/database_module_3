@@ -147,7 +147,7 @@ namespace DataBaseModule3Task
         {
             try
             {
-                NpgsqlCommand cmd = new NpgsqlCommand("SELECT users.id, users.name, users.email  FROM orders Join users ON orders.customer_id = users.id WHERE is_paid = false", connection);
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT users.id, users.name, users.email, orders.total_cost as order_total_cost FROM orders  Join users ON orders.customer_id = users.id  WHERE NOT EXISTS (SELECT null FROM payments WHERE payments.order_id = orders.id)", connection);
                 var reader = cmd.ExecuteReader();
                 
                 Console.WriteLine();
