@@ -256,7 +256,7 @@ namespace DataBaseModule3Task
         {
             try
             {
-                NpgsqlCommand cmd = new NpgsqlCommand("SELECT DISTINCT users.id AS id, users.name AS name, users.email AS email FROM users  JOIN orders ON orders.customer_id = users.id JOIN products ON products.supplier_id = orders.customer_id WHERE products.supplier_id = orders.customer_id AND orders.is_paid = true", connection);
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT DISTINCT users.id AS id, users.name AS name, users.email AS email FROM users JOIN orders ON orders.customer_id = users.id JOIN products ON products.supplier_id = orders.customer_id WHERE orders.is_paid = true", connection);
                 var reader = cmd.ExecuteReader();
                 
                 while (reader.Read())
