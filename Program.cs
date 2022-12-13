@@ -234,7 +234,7 @@ namespace DataBaseModule3Task
         {
             try
             {
-                NpgsqlCommand cmd = new NpgsqlCommand("SELECT  users.name As user_name, products.name AS product_name, reviews.id AS id, reviews.description AS description FROM reviews JOIN users ON users.id = reviews.customer_id JOIN products ON products.id = reviews.product_id JOIN orders ON orders.customer_id = reviews.id JOIN carts ON carts.product_id != products.id  WHERE NOT EXISTS (SELECT null from orders o where o.cart_id != carts.id)", connection);
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT  users.name As user_name, products.name AS product_name, reviews.id AS id, reviews.description AS description FROM reviews JOIN users ON users.id = reviews.customer_id JOIN products ON products.id = reviews.product_id JOIN orders ON orders.customer_id = reviews.customer_id JOIN carts ON carts.product_id != products.id  WHERE NOT EXISTS (SELECT null from orders o where o.cart_id != carts.id)", connection);
                 var reader = cmd.ExecuteReader();
                 
                 while (reader.Read())
